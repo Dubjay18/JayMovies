@@ -1,32 +1,22 @@
 import Image from "next/image";
-import ste from "../images/steve.jpeg";
-import { useMoralis } from "react-moralis";
-import Avatar from "./Avatar";
-import ChangeUsername from "./ChangeUsername";
-const Header = () => {
-  const { user } = useMoralis();
+import React from "react";
+import what from "../public/whatsbg.jpeg";
+import { useRouter } from "next/router";
+
+function Header() {
+  const router = useRouter();
   return (
-    <div className="sticky top-0 p-5 z-50 bg-black shadow-lg border-b-4 border-red-700 text-red-600 ">
-      <div className="grid grid-cols-5 lg:grid-cols-6 items-end lg:items-center">
-        <div className="relative h-24 w-24 mx-auto hidden lg:inline-grid">
-          <Image
-            src={ste}
-            layout="fill"
-            className="rounded-full "
-            objectFit="cover"
-          />
-        </div>
-        <div className="col-span-4 text-left lg:text-center">
-          <div className="relative h-48 w-48 lg:mx-auto border-red-600 border-4 rounded-full">
-            <Avatar logoutOnPress />
-          </div>
-          <h1 className="text-2xl">Welcome to the Jay Metaverse</h1>
-          <h2 className="text-5xl font-bold truncate">{user.getUsername()}</h2>
-          <ChangeUsername />
-        </div>
-      </div>
+    <div className=" bg-gradient-to-l from-slate-700 to-black flex px-10 w-full items-center justify-between shadow-md">
+      <h1
+        className="sm:text-4xl text-2xl text-white font-bold font-mono p-5 cursor-pointer animate-bounce"
+        onClick={() => router.push("/")}
+      >
+        JAYMOVIES
+      </h1>
+
+      <Image src={what} layout="fixed" width={40} height={40} />
     </div>
   );
-};
+}
 
 export default Header;

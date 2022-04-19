@@ -1,15 +1,15 @@
 import { MoralisProvider } from "react-moralis";
 import "../styles/globals.css";
+import Router from "next/router";
+import NProgress from "nprogress"; //nprogress module
+import "nprogress/nprogress.css"; //styles of nprogress
+//Binding events.
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <MoralisProvider
-      appId={process.env.NEXT_PUBLIC_APP_ID}
-      serverUrl={process.env.NEXT_PUBLIC_SERVER_URL}
-    >
-      <Component {...pageProps} />
-    </MoralisProvider>
-  );
+  return <Component {...pageProps} />;
 }
 
 export default MyApp;

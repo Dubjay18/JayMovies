@@ -1,23 +1,20 @@
 import Head from "next/head";
-import { useMoralis } from "react-moralis";
+
 import Header from "../components/Header";
-import Login from "../components/Login";
-import Messages from "../components/Messages";
+import requests from "../components/requests";
+import Row from "../components/Row";
+import HomePage from "./Home";
 
 export default function Home() {
-  const { isAuthenticated, logout } = useMoralis();
-
-  if (!isAuthenticated) return <Login />;
   return (
-    <div className="h-screen overflow-y-scroll bg-gradient-to-b from-black to-red-700">
+    <div className="h-screen overflow-y-scroll bg-slate-800">
       <Head>
         <title>Metaverse Challenge</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="max-w-screen-xl mx-auto">
-        <Header />
-        <Messages />
+      <div>
+        <HomePage />
       </div>
     </div>
   );
