@@ -10,7 +10,7 @@ import { css } from "@emotion/react";
 
 function HomePage() {
   const [fetchUrl, setFetchUrl] = React.useState(requests.fetchTopRated);
-  const [title, setTitle] = React.useState("Top Rated");
+  const [title, setTitle] = React.useState("Trending Now");
   let [loading, setLoading] = useState(true);
   const override = css`
     display: block;
