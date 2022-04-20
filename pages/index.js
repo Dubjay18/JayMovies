@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="h-screen overflow-y-scroll bg-slate-800">
       <Head>
-        <title>Metaverse Challenge</title>
+        <title>JayMovies</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
