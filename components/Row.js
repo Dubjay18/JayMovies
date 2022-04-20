@@ -11,7 +11,7 @@ function Row({ title, fetchUrl }) {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
       setMovies(request.data.results);
-
+      console.log(request.data.results);
       return request;
     }
     fetchData();
@@ -26,11 +26,18 @@ function Row({ title, fetchUrl }) {
               object-fit="contain"
               width={170}
               height={400}
-              className="space-x-6 p-3 hover:scale-75 sm:w-52 transition-all hover:opacity-50"
-              onClick={() => router.push(`/MovieDet/${mov.id}`)}
+              className="space-x-6 p-3 hover:scale-75 w-full sm:w-52 transition-all hover:opacity-50"
+              onClick={() => {
+                mov.media_type === "tv"
+                  ? router.push(`/series/${mov.id}`)
+                  : router.push(`/MovieDet/${mov.id}`);
+              }}
             />
-            <p className=" text-sky-500 w-2/3 hover:text-red-500 sm:text-sm text-xs cursor-pointer">
+            <p className=" text-sky-500 w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer">
               {mov?.title || mov?.original_title || mov?.name}
+              {mov.release_date
+                ? `(${mov?.release_date?.substring(0, 4)})`
+                : ""}
             </p>
           </div>
         );

@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-function MovieDet() {
+function Series() {
   const baseUrl = "https://image.tmdb.org/t/p/original";
   const [genres, setGenres] = React.useState([]);
   const [movie, setMovie] = React.useState([]);
@@ -19,11 +19,11 @@ function MovieDet() {
       autoplay: 1,
     },
   };
-  const { id } = router.query;
+  const { tv } = router.query;
   const API_KEY = "c7ad2f9f56b2f7935e7da5cf937bba66";
   useEffect(() => {
     axios
-      .get(`/movie/${id}?api_key=${API_KEY}&languages=en-US`)
+      .get(`/tv/${tv}?api_key=${API_KEY}&languages=en-US`)
       .then((res) => {
         setMovie(res.data);
         console.log(res.data);
@@ -33,13 +33,13 @@ function MovieDet() {
       })
       .catch((err) => console.log(err));
 
-    movieTrailer(null, { tmdbId: id })
+    movieTrailer(null, { tmdbId: tv })
       .then((url) => {
         const urlParams = new URLSearchParams(new URL(url).search);
         setTrailerUrl(urlParams.get("v"));
       })
       .catch((error) => console.log(error));
-  }, [id]);
+  }, [tv]);
 
   return (
     <div className="bg-black  w-full ">
@@ -47,8 +47,8 @@ function MovieDet() {
       <div className="max-w-screen-md mx-auto p-10 bg-slate-900">
         <h1 className="text-white sm:text-5xl text-2xl font-bold mb-9">
           {movie?.title || movie?.original_title || movie?.name}
-          {movie.release_date
-            ? `(${movie?.release_date?.substring(0, 4)})`
+          {movie.first_air_date
+            ? `(${movie?.first_air_date?.substring(0, 4)})`
             : ""}
         </h1>
         <LazyLoadImage
@@ -85,4 +85,4 @@ function MovieDet() {
   );
 }
 
-export default MovieDet;
+export default Series;
