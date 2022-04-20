@@ -45,11 +45,11 @@ function MovieDet() {
       <Header />
       <div className="max-w-screen-md mx-auto p-10 bg-slate-900">
         <h1 className="text-white sm:text-5xl text-2xl font-bold mb-9">
-          {movie?.title}
+          {movie?.title || movie?.original_title || movie?.name}
         </h1>
         <LazyLoadImage
           src={`${baseUrl}${movie?.poster_path || movie?.backdrop_path}`}
-          width={500}
+          width={400}
           height={700}
         />
         {

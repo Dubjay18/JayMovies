@@ -20,7 +20,7 @@ function Row({ title, fetchUrl }) {
     <div className="flex flex-wrap mx-auto bg-slate-700 shadow-white shadow-lg rounded p-4">
       {movies.map((mov, i) => {
         return (
-          <div className="flex flex-col" key={i}>
+          <div className="flex flex-col items-center" key={i}>
             <LazyLoadImage
               src={`${baseUrl}${mov.poster_path}`}
               object-fit="contain"
@@ -30,7 +30,7 @@ function Row({ title, fetchUrl }) {
               onClick={() => router.push(`/MovieDet/${mov.id}`)}
             />
             <p className=" text-sky-500 w-2/3 hover:text-red-500 sm:text-sm text-xs cursor-pointer">
-              {mov?.title}
+              {mov?.title || mov?.original_title || mov?.name}
             </p>
           </div>
         );
