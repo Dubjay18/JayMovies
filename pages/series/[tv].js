@@ -33,7 +33,9 @@ function Series() {
       })
       .catch((err) => console.log(err));
 
-    movieTrailer(null, { tmdbId: tv })
+    movieTrailer(null, {
+      tmdbId: tv,
+    })
       .then((url) => {
         const urlParams = new URLSearchParams(new URL(url).search);
         setTrailerUrl(urlParams.get("v"));
