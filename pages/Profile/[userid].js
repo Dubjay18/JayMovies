@@ -10,7 +10,7 @@ import { useStateValue } from "../../stateProvider";
 function Profile() {
   const [{ user, uid }, dispatch] = useStateValue();
   const router = useRouter();
-  const { uid } = router.query;
+  const { userid } = router.query;
   const logOut = () => {
     signOut(auth)
       .then(() => {
