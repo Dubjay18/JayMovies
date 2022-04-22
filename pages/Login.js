@@ -14,10 +14,10 @@ function Login() {
         </h1>
 
         <div
-          className="bg-teal-600 text-white py-2 px-5 hover:bg-teal-400 transition-all"
+          className="bg-teal-600 text-white py-2 md:px-5 px-2 hover:bg-teal-400 transition-all"
           onClick={() => setSignIn(true)}
         >
-          <a href="#" className=" sm:text-2xl text-xl font-bold">
+          <a href="#" className=" sm:text-2xl  font-bold">
             Sign Up
           </a>
         </div>

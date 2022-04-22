@@ -32,7 +32,7 @@ function Sign({ email, setEmail }) {
       });
   };
   return (
-    <div className="bg-slate-800 p-7 min-w-[500px] rounded drop-shadow-lg shadow-lg">
+    <div className="bg-slate-800 p-7 sm:w-full max-w-[500px] rounded drop-shadow-lg shadow-lg">
       <h1 className="text-2xl text-white font-bold">Sign In</h1>
       <form className="flex flex-col">
         <input
