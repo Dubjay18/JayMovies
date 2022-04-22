@@ -35,7 +35,7 @@ function Login() {
               <input
                 type="email"
                 placeholder="Email Address"
-                className="p-5 outline-none"
+                className="p-5 outline-none text-black"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
