@@ -13,7 +13,6 @@ function Sign({ email, setEmail }) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         // Signed in
-        console.log(res);
         // ...
       })
       .catch((error) => {
@@ -26,7 +25,6 @@ function Sign({ email, setEmail }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         // Signed in
-        console.log(res);
         // ...
       })
       .catch((error) => {
