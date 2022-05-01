@@ -17,16 +17,14 @@ function Row({ title, fetchUrl }) {
     fetchData();
   }, [fetchUrl]);
   return (
-    <div className="flex flex-wrap mx-auto bg-slate-700 shadow-white shadow-lg rounded p-4">
+    <div className="flex flex-wrap mx-auto bg-base-200  shadow-lg rounded p-4">
       {movies.map((mov, i) => {
         return (
           <div className="flex flex-col items-center" key={i}>
             <LazyLoadImage
               src={`${baseUrl}${mov.poster_path}`}
               object-fit="contain"
-              width={170}
-              height={400}
-              className="space-x-6 p-3 hover:scale-75 w-full sm:w-52 transition-all hover:opacity-50"
+              className="space-x-6 p-3 hover:scale-75 w-full sm:w-72 transition-all hover:opacity-50"
               onClick={() => {
                 mov.media_type === "tv"
                   ? router.push(`/series/${mov.id}`)

@@ -6,5 +6,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: ["@emotion"],
+  plugins: ["@emotion", require("daisyui")],
 };

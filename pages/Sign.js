@@ -5,7 +5,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 
-function Sign({ email, setEmail }) {
+function Sign({ email, setEmail, title, reg }) {
   const [password, setPassword] = useState("");
   const register = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function Sign({ email, setEmail }) {
   };
   return (
     <div className="bg-slate-800 p-7 sm:w-full max-w-[500px] rounded drop-shadow-lg shadow-lg">
-      <h1 className="text-2xl text-white font-bold">Sign In</h1>
+      <h1 className="text-2xl text-white font-bold">{title}</h1>
       <form className="flex flex-col">
         <input
           type="email"
@@ -49,21 +49,35 @@ function Sign({ email, setEmail }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          onClick={SignIn}
-          className="bg-teal-600 my-7 text-white rounded-bl-lg rounded-tr-lg hover:bg-teal-400 transition-all p-5"
-        >
-          Sign In
-        </button>
-        <p className="text-sm text-gray-400">
-          New to JayMovies?
-          <span
-            className="ml-2 text-white cursor-pointer hover:text-gray-100 transition-all"
-            onClick={register}
-          >
-            Sign Up now
-          </span>
-        </p>
+        {reg ? (
+          <>
+            <button
+              onClick={register}
+              className="bg-teal-600 my-7 text-white rounded-bl-lg rounded-tr-lg hover:bg-teal-400 transition-all p-5"
+            >
+              Sign Up
+            </button>
+          </>
+        ) : (
+          <>
+            {" "}
+            <button
+              onClick={SignIn}
+              className="bg-teal-600 my-7 text-white rounded-bl-lg rounded-tr-lg hover:bg-teal-400 transition-all p-5"
+            >
+              Sign In
+            </button>
+            <p className="text-sm text-gray-400">
+              New to JayMovies?
+              <span
+                className="ml-2 text-white cursor-pointer hover:text-gray-100 transition-all"
+                onClick={register}
+              >
+                Sign Up now
+              </span>
+            </p>
+          </>
+        )}
       </form>
     </div>
   );

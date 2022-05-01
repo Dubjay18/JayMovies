@@ -5,6 +5,7 @@ import Sign from "./Sign";
 
 function Login() {
   const [signIn, setSignIn] = useState(false);
+  const [signUp, setSignUp] = useState(false);
   const [email, setEmail] = useState("");
   return (
     <div className=" bg-cus h-screen bg-no-repeat bg-cover">
@@ -18,18 +19,21 @@ function Login() {
           onClick={() => setSignIn(true)}
         >
           <a href="#" className=" sm:text-2xl  font-bold">
-            Sign Up
+            Sign In
           </a>
         </div>
       </div>
       <div className="flex items-center justify-center w-full h-2/3">
         {signIn ? (
-          <Sign email={email} setEmail={setEmail} />
+          <Sign email={email} setEmail={setEmail} title={"Sign In"} />
+        ) : signUp ? (
+          <Sign email={email} setEmail={setEmail} title={"Sign Up"} reg />
         ) : (
           <div className="text-center text-white">
             <h1 className="sm:text-4xl text-2xl font-bold drop-shadow">
               Watch Movies and Tv Programmes
             </h1>
+
             <h2 className="text-sm  my-6">watch anywhere cancel at anytime</h2>
             <form>
               <input
@@ -40,8 +44,8 @@ function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <button
-                className="bg-teal-600 p-5"
-                onClick={() => setSignIn(true)}
+                className="bg-base-100 p-5"
+                onClick={() => setSignUp(true)}
               >
                 GET STARTED
               </button>
