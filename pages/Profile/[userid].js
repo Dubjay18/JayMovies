@@ -45,34 +45,7 @@ function Profile() {
 
               <p className="p-2 text-white">Renewal data: 04/05/2021</p>
               <p className="text-white p-2 flex w-full justify-between">
-                <span className="flex flex-col">
-                  {" "}
-                  <span>JayMovies Standard</span>
-                  <span>1080p</span>
-                </span>
-                <button className="py-1 px-2  bg-teal-500 text-white transition-all hover:scale-95">
-                  Subscribe
-                </button>
-              </p>
-              <p className="text-white p-2 flex w-full justify-between">
-                <span className="flex flex-col">
-                  {" "}
-                  <span>JayMovies Basic</span>
-                  <span>480p</span>
-                </span>
-                <button className="py-1 px-2  bg-teal-500 text-white transition-all hover:scale-95">
-                  Subscribe
-                </button>
-              </p>
-              <p className="text-white p-2 flex w-full justify-between">
-                <span className="flex flex-col">
-                  {" "}
-                  <span>JayMovies Premium</span>
-                  <span>4k+HDR</span>
-                </span>
-                <button className="py-1 px-2  bg-gray-400 text-white transition-all hover:scale-95">
-                  Current Package
-                </button>
+                
               </p>
               <button
                 onClick={logOut}
