@@ -51,8 +51,7 @@ function HomePage() {
           {title}
         </h1>
         <select
-          className="bg-slate-800 shadow-xl text-white h-full p-4"
-          name="movie fields"
+          className="select select-bordered"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         >
