@@ -7,7 +7,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
 function Header() {
-  const [{ user, uid }, dispatch] = useStateValue();
+  const [{ user, uid, darkmode }, dispatch] = useStateValue();
   const router = useRouter();
   const logOut = () => {
     signOut(auth)
@@ -27,9 +27,15 @@ function Header() {
         alert(error.message);
       });
   };
+  const mode = () => {
+    dispatch({
+      type: "SET_DARKMODE",
+      darkmode: !darkmode,
+    });
+  };
   return (
     <>
-      <div class="navbar shadow-md bg-base-100">
+      <div class="navbar shadow-md bg-slate-100 dark:bg-base-100">
         <div class="flex-1">
           <h1
             class="btn btn-ghost normal-case text-xl animate-bounce"
@@ -38,11 +44,15 @@ function Header() {
             JAYmovies
           </h1>
         </div>
-        <label class="swap swap-rotate">
-          <input type="checkbox" />
+        <label class="swap swap-rotate " onChange={mode}>
+          {darkmode ? (
+            <input type="checkbox" />
+          ) : (
+            <input type="checkbox" checked />
+          )}
 
           <svg
-            class="swap-on fill-current w-10 h-10"
+            class="swap-on fill-current md:w-10 md:h-10 w-5 h-5"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -50,7 +60,7 @@ function Header() {
           </svg>
 
           <svg
-            class="swap-off fill-current w-10 h-10"
+            class="swap-off fill-current md:w-10 md:h-10 w-5 h-5"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -82,7 +92,7 @@ function Header() {
               tabindex="0"
               class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
-              <div class="card-body">
+              <div class="card-body dark:bg-slate-900 bg-white">
                 {/* <span class="font-bold text-lg">8 Items</span> */}
                 <span class="text-info">site still in development stage</span>
               </div>
@@ -96,7 +106,7 @@ function Header() {
             </label>
             <ul
               tabindex="0"
-              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow  dark:bg-base-100 bg-white rounded-box w-52"
             >
               <li>
                 <a
@@ -104,7 +114,9 @@ function Header() {
                   onClick={() => router.push(`/Profile/${uid}`)}
                 >
                   Profile
-                  <span class="badge">New</span>
+                  <span class="badge dark:bg-black dark:border-black bg-slate-200 border-white">
+                    New
+                  </span>
                 </a>
               </li>
 

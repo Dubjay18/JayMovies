@@ -11,7 +11,7 @@ import Login from "./Login";
 import { useStateValue } from "./../stateProvider";
 
 export default function Home() {
-  const [{ user, uid }, dispatch] = useStateValue();
+  const [{ user, uid, darkmode }, dispatch] = useStateValue();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userCred) => {
@@ -43,7 +43,13 @@ export default function Home() {
     return <Login />;
   }
   return (
-    <div className="h-screen overflow-y-scroll bg-base-100">
+    <div
+      className={
+        darkmode
+          ? "h-screen overflow-y-scroll  dark dark:bg-base-100"
+          : "h-screen overflow-y-scroll bg-slate-200 dark:bg-base-100"
+      }
+    >
       <Head>
         <title>JayMovies</title>
         <link rel="icon" href="/favicon.ico" />

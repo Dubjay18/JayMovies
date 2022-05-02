@@ -6,8 +6,10 @@ import Header from "../../components/Header";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useStateValue } from "../../stateProvider";
 function Series() {
   const baseUrl = "https://image.tmdb.org/t/p/original";
+  const [{ darkmode }, dispatch] = useStateValue();
   const [genres, setGenres] = React.useState([]);
   const [movie, setMovie] = React.useState([]);
   const [trailerUrl, setTrailerUrl] = React.useState("");
@@ -44,10 +46,16 @@ function Series() {
   }, [tv]);
 
   return (
-    <div className="bg-black  w-full ">
+    <div
+      className={
+        darkmode
+          ? "dark:bg-black dark w-full "
+          : "dark:bg-black bg-slate-200 w-full "
+      }
+    >
       <Header />
-      <div className="max-w-screen-md mx-auto p-10 bg-slate-900">
-        <h1 className="text-white sm:text-5xl text-2xl font-bold mb-9">
+      <div className="max-w-screen-md mx-auto mt-10 p-10 dark:text-white text-slate-600 dark:bg-slate-900 bg-slate-50">
+        <h1 className="dark:text-white text-slate-600  sm:text-5xl text-2xl font-bold mb-9">
           {movie?.title || movie?.original_title || movie?.name}
           {movie.first_air_date
             ? `(${movie?.first_air_date?.substring(0, 4)})`
@@ -59,7 +67,7 @@ function Series() {
           height={700}
         />
         {
-          <p className="flex sm:text-xl font-medium text-white my-6">
+          <p className="flex sm:text-xl font-medium dark:text-white text-slate-600 my-6">
             <span className="underline">Genre: </span>
             {genres.map((e, i) => {
               return (
@@ -71,14 +79,14 @@ function Series() {
             })}
           </p>
         }
-        <p className="sm:text-xl  italic text-white mb-6">
+        <p className="sm:text-xl  italic dark:text-white text-slate-600  mb-6">
           <span className="underline font-medium">Details</span>:{" "}
           {movie?.overview}
         </p>
         {trailerUrl ? (
           <YouTube videoId={trailerUrl} opts={opts} />
         ) : (
-          <h1 className=" italic font-thin text-white">
+          <h1 className=" italic font-thin dark:text-white text-slate-600 ">
             Trailer not avaliable
           </h1>
         )}

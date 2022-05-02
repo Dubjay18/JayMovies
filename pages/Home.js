@@ -44,14 +44,14 @@ function HomePage() {
   }, [title]);
 
   return (
-    <div>
+    <div className="">
       <Header />
       <div className="flex justify-between items-center mx-9">
-        <h1 className="sm:text-4xl text-2xl text-white font-extrabold font-mono my-10">
+        <h1 className="sm:text-4xl text-2xl dark:text-white text-gray-800 font-extrabold font-mono my-10">
           {title}
         </h1>
         <select
-          className="select select-bordered"
+          className="select select-bordered dark:text-white text-gray-800 dark:bg-base-200 bg-slate-50"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         >
@@ -83,7 +83,7 @@ function HomePage() {
         )}
       </div>
 
-      <footer class="footer items-center p-4 bg-neutral text-neutral-content mt-16">
+      <footer class="footer items-center p-4 dark:bg-neutral dark:text-neutral-content bg-slate-50 mt-16">
         <div class="items-center grid-flow-col">
           <svg
             width="36"

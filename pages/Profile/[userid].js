@@ -8,7 +8,7 @@ import pp from "../../public/whatsbg.jpeg";
 import { useStateValue } from "../../stateProvider";
 
 function Profile() {
-  const [{ user, uid }, dispatch] = useStateValue();
+  const [{ user, uid, darkmode }, dispatch] = useStateValue();
   const router = useRouter();
   const { userid } = router.query;
   const logOut = () => {
@@ -30,26 +30,36 @@ function Profile() {
       });
   };
   return (
-    <div className="bg-slate-800 h-screen">
+    <div
+      className={
+        darkmode
+          ? "dark:bg-slate-800 dark h-screen"
+          : "dark:bg-slate-800 bg-slate-200  h-screen"
+      }
+    >
       <Header />
       <div className="lg:h-2/3 h-4/5 flex items-center justify-center  sm:min-w-[400px] ">
         <div className="  w-2/3 md:mx-0 mx-2">
-          <h1 className="lg:text-3xl text-xl text-white my-5">Edit Profile</h1>
+          <h1 className="lg:text-3xl text-xl dark:text-white text-black my-5">
+            Edit Profile
+          </h1>
           <div className="sm:flex ">
             <Image src={pp} layout="fixed" width={70} height={70} />
             <div className="w-full ml-4 flex flex-col ">
-              <h1 className="sm:p-5 p-3 bg-gray-500 text-white">{user}</h1>
-              <p className="md:text-xl text-white font-bold border-b-2 p-2 border-gray-700">
+              <h1 className="sm:p-5 p-3 bg-gray-500 dark:text-white text-black">
+                {user}
+              </h1>
+              <p className="md:text-xl dark:text-white text-black font-bold border-b-2 p-2 border-gray-700">
                 Plans (Current Plan: Premium)
               </p>
 
-              <p className="p-2 text-white">Renewal data: 04/05/2021</p>
-              <p className="text-white p-2 flex w-full justify-between">
-                
+              <p className="p-2 dark:text-white text-black">
+                Renewal data: 04/05/2021
               </p>
+              <p className="dark:text-white text-black p-2 flex w-full justify-between"></p>
               <button
                 onClick={logOut}
-                className=" text-white p-3 mt-3 bg-teal-400 transition-all hover:scale-95"
+                className=" text-white  p-3 mt-3 dark:bg-teal-400 bg-teal-800 transition-all hover:scale-95"
               >
                 Sign out
               </button>

@@ -17,7 +17,7 @@ function Row({ title, fetchUrl }) {
     fetchData();
   }, [fetchUrl]);
   return (
-    <div className="flex flex-wrap mx-auto bg-base-200  shadow-lg rounded p-4">
+    <div className="flex flex-wrap mx-auto dark:bg-base-200 bg-slate-50  shadow-lg rounded p-4">
       {movies.map((mov, i) => {
         return (
           <div className="flex flex-col items-center" key={i}>
@@ -31,10 +31,12 @@ function Row({ title, fetchUrl }) {
                   : router.push(`/MovieDet/${mov.id}`);
               }}
             />
-            <p className=" text-sky-500 w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer">
+            <p className=" text-sky-500 font-medium w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer">
               {mov?.title || mov?.original_title || mov?.name}
               {mov.release_date
                 ? `(${mov?.release_date?.substring(0, 4)})`
+                : mov.first_air_date
+                ? `(${mov?.first_air_date?.substring(0, 4)})`
                 : ""}
             </p>
           </div>

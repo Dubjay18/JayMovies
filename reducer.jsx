@@ -1,10 +1,12 @@
 export const initialState = {
   user: null,
   uid: null,
+  darkmode: true,
 };
 export const actionTypes = {
   SET_USER: "SET_USER",
   SET_UID: "SET_UID",
+  SET_DARKMODE: "SET_DARKMODE",
 };
 
 const reducer = (state, action) => {
@@ -18,6 +20,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         uid: action.uid,
+      };
+    case actionTypes.SET_DARKMODE:
+      return {
+        ...state,
+        darkmode: action.darkmode,
       };
 
     default:
