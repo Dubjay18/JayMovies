@@ -31,7 +31,14 @@ function Row({ title, fetchUrl }) {
                   : router.push(`/MovieDet/${mov.id}`);
               }}
             />
-            <p className=" text-sky-500 font-medium w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer">
+            <p
+              className=" text-sky-500 font-medium w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer"
+              onClick={() => {
+                mov.media_type === "tv"
+                  ? router.push(`/series/${mov.id}`)
+                  : router.push(`/MovieDet/${mov.id}`);
+              }}
+            >
               {mov?.title || mov?.original_title || mov?.name}
               {mov.release_date
                 ? `(${mov?.release_date?.substring(0, 4)})`
