@@ -10,3 +10,17 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.image-container {
+  width: 100%;
+}
+.image-container > div {
+  position: unset !important;
+}
+
+.image {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
