@@ -78,7 +78,7 @@ function HomePage() {
           </div>
         ) : (
           <>
-            <Row title={title} fetchUrl={fetchUrl} />
+            <Row title={title} fetchUrl={fetchUrl} itemsPerPage={20} />
           </>
         )}
       </div>
