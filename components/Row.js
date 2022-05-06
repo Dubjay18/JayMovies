@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useRouter } from "next/router";
-import what from "../public/whatsbg.jpeg";
-import requests from "./requests";
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
 import NProgress from "nprogress";
@@ -14,13 +12,10 @@ function Row({ title, fetchUrl, itemsPerPage }) {
   const [movies, setMovies] = React.useState([]);
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);
-  const nums = [1, 2, 3, 4, 5, 6, 7, 8];
-  const [currentItems, setCurrentItems] = React.useState();
   const [items, setItems] = React.useState(1000);
   const [pageCount, setPageCount] = useState(1);
   const [itemOffset, setItemOffset] = useState(1);
   let [loading, setLoading] = useState(true);
-  const [pos, setPos] = useState(1);
   const override = css`
     display: block;
     margin: 0 auto;
@@ -43,29 +38,10 @@ function Row({ title, fetchUrl, itemsPerPage }) {
     setPageCount(Math.ceil((items * 10) / itemsPerPage));
     return request;
   }
-  async function next(e) {
-    console.log(e);
-    setPos(e);
-    const request = await axios.get(`${fetchUrl}&page=${pos}`);
-    NProgress.start();
-    setLoading(true);
-    if (request.status === 200 || 201) {
-      NProgress.done();
-      setLoading(false);
-    }
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-
-    setPageCount(Math.ceil((items * 10) / itemsPerPage));
-    setMovies(request?.data?.results);
-    return request;
-  }
-  // useEffect(() => {}, [third]);
-
   useEffect(() => {
     getMovies(1);
     console.log(pageCount);
-  }, []);
+  }, [fetchUrl]);
   const handlePageClick = (event) => {
     NProgress.start();
     setLoading(true);
@@ -76,7 +52,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
     );
     getMovies(event.selected + 1);
     setItemOffset(newOffset);
-    // NProgress.done();
+    NProgress.done();
     setLoading(false);
   };
   const convertImage = (w, h) => `
@@ -114,7 +90,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
         activeLinkClassName="btn btn-active bg-indigo-700"
         pageLinkClassName="btn btn-outline"
       />
-      <div className="sm:flex flex-wrap mx-auto dark:bg-base-200 bg-slate-50  shadow-lg rounded p-4">
+      <div className="sm:flex flex-wrap mx-auto rounded p-4">
         {loading ? (
           <BounceLoader
             color={"gray"}
@@ -127,8 +103,11 @@ function Row({ title, fetchUrl, itemsPerPage }) {
             return (
               <div className="flex flex-col items-center" key={i}>
                 <div className=" h-96  sm:mx-7 mx-11 my-8 sm:w-72 w-3/4 image-container relative">
+                  {/* <LazyLoadImage
+                 src=""
+                 placeholder={}
+                 /> */}
                   <Image
-                    style={!loaded ? { visibility: "hidden" } : {}}
                     onLoad={() => setLoaded(true)}
                     src={`${baseUrl}${mov?.poster_path}`}
                     object-fit="contain"
@@ -137,7 +116,11 @@ function Row({ title, fetchUrl, itemsPerPage }) {
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(
                       convertImage(700, 475)
                     )}`}
-                    className="space-x-6 rounded-[2.5rem] p-3 hover:scale-75 w-full sm:w-72 transition-all hover:opacity-50"
+                    className={
+                      !loaded
+                        ? "space-x-6 rounded-[2.5rem] p-3 hover:scale-125 w-full sm:w-72 transition-all hover:opacity-50 hidden"
+                        : "space-x-6 rounded-[2.5rem] p-3 hover:scale-125 w-full sm:w-72 transition-all hover:opacity-50"
+                    }
                     onClick={() => {
                       mov.media_type === "tv"
                         ? router.push(`/series/${mov.id}`)
@@ -147,7 +130,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
                 </div>
 
                 <p
-                  className=" text-sky-500 font-medium w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer"
+                  className=" dark:text-sky-500 text-sky-700 font-bold w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer"
                   onClick={() => {
                     mov.media_type === "tv"
                       ? router.push(`/series/${mov.id}`)

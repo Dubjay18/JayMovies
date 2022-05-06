@@ -35,13 +35,13 @@ function Header() {
   };
   return (
     <>
-      <div class="navbar shadow-md bg-slate-100 dark:bg-base-100">
+      <div class="navbar shadow-md bg-slate-50 dark:bg-base-100">
         <div class="flex-1">
           <h1
-            class="btn btn-ghost normal-case text-xl animate-bounce"
+            class="btn btn-ghost normal-case dark:text-gray-200 text-gray-900 text-xl animate-bounce"
             onClick={() => router.push("/")}
           >
-            JAYmovies
+            <span className="text-primary font-bold">JAY</span>movies
           </h1>
         </div>
         <label class="swap swap-rotate " onChange={mode}>

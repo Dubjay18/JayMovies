@@ -12,6 +12,7 @@ function HomePage() {
   const [fetchUrl, setFetchUrl] = React.useState(requests.fetchTopRated);
   const [title, setTitle] = React.useState("Trending Now");
   let [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
   const override = css`
     display: block;
     margin: 0 auto;
@@ -23,6 +24,11 @@ function HomePage() {
       setLoading(false);
     }, 2000);
   };
+  const changeSearch = (value) => {
+    setFetchUrl(`${requests.fetchSearch}&query=${value}`);
+    console.log(fetchUrl);
+  };
+  // useEffect(())
   useEffect(() => {
     const Url = () => {
       load();
@@ -38,32 +44,47 @@ function HomePage() {
         setFetchUrl(requests.fetchHorrorMovies);
       } else if (title === "Romance Movies") {
         setFetchUrl(requests.fetchRomanceMovies);
+      } else {
+        changeSearch(search);
       }
     };
-    Url();
-  }, [title]);
+    if (!search) {
+      Url();
+    } else {
+      changeSearch(search);
+    }
+  }, [title, search]);
 
   return (
     <div className="">
       <Header />
-      <div className="flex justify-between items-center mx-9">
+      <div className="flex flex-wrap my-5 justify-between items-center mx-9">
         <h1 className="sm:text-4xl text-2xl dark:text-white text-gray-800 font-extrabold font-mono my-10">
-          {title}
+          <select
+            className="select select-bordered dark:text-white text-gray-800 dark:bg-base-200 bg-slate-50"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          >
+            <option value="Trending Now">Trending Now</option>
+            <option value="Top Rated">Top Rated</option>
+            <option value="Action Movies">Action Movies</option>
+            <option onClick={load} value="Comedy Movies">
+              Comedy Movies
+            </option>
+            <option value="Horror Movies">Horror Movies</option>
+            <option value="Romance Movies">Romance Movies</option>
+          </select>
         </h1>
-        <select
-          className="select select-bordered dark:text-white text-gray-800 dark:bg-base-200 bg-slate-50"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        >
-          <option value="Trending Now">Trending Now</option>
-          <option value="Top Rated">Top Rated</option>
-          <option value="Action Movies">Action Movies</option>
-          <option onClick={load} value="Comedy Movies">
-            Comedy Movies
-          </option>
-          <option value="Horror Movies">Horror Movies</option>
-          <option value="Romance Movies">Romance Movies</option>
-        </select>
+
+        <div class="form-control">
+          <input
+            type="text"
+            placeholder="Search"
+            className="input input-bordered"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className=" max-w-screen-2xl flex flex-wrap mx-auto">
