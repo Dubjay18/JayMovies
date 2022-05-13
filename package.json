@@ -10,6 +10,7 @@
     "axios": "^0.26.1",
     "daisyui": "^2.14.3",
     "firebase": "^9.6.11",
+    "framer-motion": "^6.3.3",
     "moralis": "0.0.176",
     "movie-trailer": "^2.1.0",
     "next": "latest",

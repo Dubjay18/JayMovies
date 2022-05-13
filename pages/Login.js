@@ -1,12 +1,27 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import what from "../public/whatsbg.jpeg";
+import { motion } from "framer-motion";
 import Sign from "./Sign";
 
 function Login() {
   const [signIn, setSignIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [email, setEmail] = useState("");
+  const container = {
+    hidden: { opacity: 0, marginLeft: "-100px" },
+    show: {
+      opacity: 1,
+      marginLeft: "0px",
+      transition: {
+        delayChildren: 0.5,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, marginLeft: "-100px" },
+    show: { opacity: 1, marginLeft: "0px" },
+  };
   return (
     <div className=" bg-cus h-screen bg-no-repeat bg-cover">
       <div className="bg-transparent  flex px-10 w-full items-center justify-between shadow-md">
@@ -29,13 +44,23 @@ function Login() {
         ) : signUp ? (
           <Sign email={email} setEmail={setEmail} title={"Sign Up"} reg />
         ) : (
-          <div className="text-center text-white">
-            <h1 className="sm:text-4xl text-2xl font-bold drop-shadow">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="text-center text-white"
+          >
+            <motion.h1
+              variants={item}
+              className="sm:text-4xl text-2xl font-bold drop-shadow"
+            >
               Watch Movies and Tv Programmes
-            </h1>
+            </motion.h1>
 
-            <h2 className="text-sm  my-6">watch anywhere cancel at anytime</h2>
-            <form>
+            <motion.h2 variants={item} className="text-sm  my-6">
+              watch anywhere cancel at anytime
+            </motion.h2>
+            <motion.form variants={item}>
               <input
                 type="email"
                 placeholder="Email Address"
@@ -43,14 +68,20 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <button
+              <motion.button
+                whileHover={{
+                  scale: 1.2,
+                  transition: { duration: 0.4 },
+                }}
+                whileTap={{ scale: 0.9 }}
+                variants={item}
                 className="bg-base-100 p-5"
                 onClick={() => setSignUp(true)}
               >
                 GET STARTED
-              </button>
-            </form>
-          </div>
+              </motion.button>
+            </motion.form>
+          </motion.div>
         )}
       </div>
     </div>

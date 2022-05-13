@@ -101,7 +101,10 @@ function Row({ title, fetchUrl, itemsPerPage }) {
         ) : (
           movies?.map((mov, i) => {
             return (
-              <div className="flex flex-col items-center" key={i}>
+              <div
+                className="flex flex-col items-center bg-slate-900 p-2 m-2"
+                key={i}
+              >
                 <div className=" h-96  sm:mx-7 mx-11 my-8 sm:w-72 w-3/4 image-container relative">
                   {/* <LazyLoadImage
                  src=""
@@ -129,6 +132,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
                   />
                 </div>
 
+                <div></div>
                 <p
                   className=" dark:text-sky-500 text-sky-700 font-bold w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer"
                   onClick={() => {
@@ -137,13 +141,18 @@ function Row({ title, fetchUrl, itemsPerPage }) {
                       : router.push(`/MovieDet/${mov.id}`);
                   }}
                 >
-                  {mov?.title || mov?.original_title || mov?.name}
+                  {mov?.title ||
+                    mov?.original_title ||
+                    mov?.name.substring(0, 26) + "..."}
                   {mov.release_date
                     ? `(${mov?.release_date?.substring(0, 4)})`
                     : mov.first_air_date
                     ? `(${mov?.first_air_date?.substring(0, 4)})`
                     : ""}
                 </p>
+                <div className="ml-52 text-sm text-amber-600 md:block hidden ">
+                  <p>{mov?.vote_average}</p>
+                </div>
               </div>
             );
           })
