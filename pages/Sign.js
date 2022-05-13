@@ -78,7 +78,7 @@ function Sign({ email, setEmail, title, reg }) {
           variants={container}
           initial="hidden"
           animate="show"
-          className=" absolute alert alert-success shadow-lg"
+          className=" lg:absolute alert alert-success shadow-lg"
         >
           <motion.div variants={item}>
             <svg
