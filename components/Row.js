@@ -7,14 +7,16 @@ import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
 import NProgress from "nprogress";
 import ReactPaginate from "react-paginate";
+import { useStateValue } from "../stateProvider";
 const baseUrl = "https://image.tmdb.org/t/p/original";
 function Row({ title, fetchUrl, itemsPerPage }) {
+  const [{ page }, dispatch] = useStateValue();
   const [movies, setMovies] = React.useState([]);
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const [items, setItems] = React.useState(1000);
-  const [pageCount, setPageCount] = useState(1);
-  const [itemOffset, setItemOffset] = useState(1);
+  const [pageCount, setPageCount] = useState(page);
+  const [itemOffset, setItemOffset] = useState(page);
   let [loading, setLoading] = useState(true);
   const override = css`
     display: block;
@@ -31,27 +33,25 @@ function Row({ title, fetchUrl, itemsPerPage }) {
     }
     setItems(request.data.total_pages);
     setMovies(request.data.results);
-    console.log(request.data.results);
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
 
     setPageCount(Math.ceil((items * 10) / itemsPerPage));
     return request;
   }
   useEffect(() => {
-    getMovies(1);
-    console.log(pageCount);
+    getMovies(page);
   }, [fetchUrl]);
   const handlePageClick = (event) => {
     NProgress.start();
     setLoading(true);
     const newOffset = (event.selected + 1 * itemsPerPage) % movies?.length;
-
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    dispatch({
+      type: "SET_PAGE",
+      page: event.selected + 1,
+    });
     getMovies(event.selected + 1);
-    setItemOffset(newOffset);
+    console.log(newOffset);
+    // setItemOffset(newOffset);
     NProgress.done();
     setLoading(false);
   };
@@ -89,8 +89,9 @@ function Row({ title, fetchUrl, itemsPerPage }) {
         nextLinkClassName="btn btn-outline"
         activeLinkClassName="btn btn-active bg-indigo-700"
         pageLinkClassName="btn btn-outline"
+        initialPage={page - 1}
       />
-      <div className="sm:flex flex-wrap mx-auto rounded p-4">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-4 mx-auto rounded p-4">
         {loading ? (
           <BounceLoader
             color={"gray"}
@@ -102,7 +103,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
           movies?.map((mov, i) => {
             return (
               <div
-                className="flex flex-col items-center bg-slate-900 p-2 m-2"
+                className="flex flex-col items-center dark:bg-slate-900 bg-slate-200 p-2 m-2"
                 key={i}
               >
                 <div className=" h-96  sm:mx-7 mx-11 my-8 sm:w-72 w-3/4 image-container relative">
@@ -161,6 +162,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
+        initialPage={page - 1}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
