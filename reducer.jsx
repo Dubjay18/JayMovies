@@ -3,12 +3,14 @@ export const initialState = {
   uid: null,
   darkmode: true,
   page: 1,
+  title: "Trending Now",
 };
 export const actionTypes = {
   SET_USER: "SET_USER",
   SET_UID: "SET_UID",
   SET_DARKMODE: "SET_DARKMODE",
   SET_PAGE: "SET_PAGE",
+  SET_TITLE: "SET_TITLE",
 };
 
 const reducer = (state, action) => {
@@ -32,6 +34,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         page: action.page,
+      };
+    case actionTypes.SET_TITLE:
+      return {
+        ...state,
+        title: action.title,
       };
 
     default:

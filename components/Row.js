@@ -15,7 +15,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
   const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const [items, setItems] = React.useState(1000);
-  const [pageCount, setPageCount] = useState(page);
+  const [pageCount, setPageCount] = useState(1);
   const [itemOffset, setItemOffset] = useState(page);
   let [loading, setLoading] = useState(true);
   const override = css`

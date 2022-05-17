@@ -7,10 +7,12 @@ import PulseLoader from "react-spinners/PulseLoader";
 import BounceLoader from "react-spinners/BounceLoader";
 import { useState } from "react";
 import { css } from "@emotion/react";
+import { useStateValue } from "../stateProvider";
 
 function HomePage() {
+  const [{ title }, dispatch] = useStateValue();
   const [fetchUrl, setFetchUrl] = React.useState(requests.fetchTopRated);
-  const [title, setTitle] = React.useState("Trending Now");
+
   let [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const override = css`
@@ -24,9 +26,14 @@ function HomePage() {
       setLoading(false);
     }, 2000);
   };
-  const changeSearch = (value) => {
-    setFetchUrl(`${requests.fetchSearch}&query=${value}`);
-    console.log(fetchUrl);
+  const changeSearch = (e) => {
+    e.preventDefault();
+    console.log(e.target[0].value);
+    setFetchUrl(`${requests.fetchSearch}&query=${e.target[0].value}`);
+    dispatch({
+      type: "SET_PAGE",
+      page: 1,
+    });
   };
   // useEffect(())
   useEffect(() => {
@@ -44,16 +51,11 @@ function HomePage() {
         setFetchUrl(requests.fetchHorrorMovies);
       } else if (title === "Romance Movies") {
         setFetchUrl(requests.fetchRomanceMovies);
-      } else {
-        changeSearch(search);
       }
     };
-    if (!search) {
-      Url();
-    } else {
-      changeSearch(search);
-    }
-  }, [title, search]);
+
+    Url();
+  }, [title]);
 
   return (
     <div className="">
@@ -63,7 +65,16 @@ function HomePage() {
           <select
             className="select select-bordered dark:text-white text-gray-800 dark:bg-base-200 bg-slate-50"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              dispatch({
+                type: "SET_TITLE",
+                title: e.target.value,
+              });
+              dispatch({
+                type: "SET_PAGE",
+                page: 1,
+              });
+            }}
           >
             <option value="Trending Now">Trending Now</option>
             <option value="Top Rated">Top Rated</option>
@@ -76,15 +87,17 @@ function HomePage() {
           </select>
         </h1>
 
-        <div class="form-control">
+        <form onSubmit={changeSearch} class="form-control">
           <input
             type="text"
             placeholder="Search"
             className="input input-bordered"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
           />
-        </div>
+          <button type="submit" className="hidden">
+            {" "}
+            submit
+          </button>
+        </form>
       </div>
 
       <div className=" max-w-screen-2xl flex flex-wrap mx-auto">
