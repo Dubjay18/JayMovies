@@ -44,18 +44,15 @@ export default function Home() {
   }
   return (
     <div
-      className={
-        darkmode
-          ? "h-screen overflow-y-scroll  dark dark:bg-base-100"
-          : "h-screen overflow-y-scroll bg-slate-200 dark:bg-base-100"
-      }
+      data-theme={darkmode ? "halloween" : "cupcake"}
+      className={"h-screen overflow-y-scroll bg-base-100"}
     >
       <Head>
         <title>JayMovies</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
+      <div data-theme={darkmode ? "halloween" : "cupcake"}>
         <HomePage />
       </div>
     </div>

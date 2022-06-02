@@ -8,6 +8,8 @@ import BounceLoader from "react-spinners/BounceLoader";
 import NProgress from "nprogress";
 import ReactPaginate from "react-paginate";
 import { useStateValue } from "../stateProvider";
+import { StarIcon } from "@heroicons/react/solid";
+
 const baseUrl = "https://image.tmdb.org/t/p/original";
 function Row({ title, fetchUrl, itemsPerPage }) {
   const [{ page }, dispatch] = useStateValue();
@@ -74,7 +76,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
       ? Buffer.from(str).toString("base64")
       : window.btoa(str);
   return (
-    <div className="dark:bg-base-200 bg-slate-50 mx-auto w-full">
+    <div className="bg-base-200  mx-auto w-full">
       {" "}
       <ReactPaginate
         breakLabel="..."
@@ -103,7 +105,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
           movies?.map((mov, i) => {
             return (
               <div
-                className="flex flex-col items-center dark:bg-slate-900 bg-slate-200 p-2 m-2"
+                className="flex flex-col items-center bg-base-300 p-2 m-2"
                 key={i}
               >
                 <div className=" h-96  sm:mx-7 mx-11 my-8 sm:w-72 w-3/4 image-container relative">
@@ -135,7 +137,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
 
                 <div></div>
                 <p
-                  className=" dark:text-sky-500 text-sky-700 font-bold w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer"
+                  className=" text-accent font-bold w-2/3 hover:text-red-500 sm:text-sm text:xl cursor-pointer"
                   onClick={() => {
                     mov.media_type === "tv"
                       ? router.push(`/series/${mov.id}`)
@@ -151,8 +153,11 @@ function Row({ title, fetchUrl, itemsPerPage }) {
                     ? `(${mov?.first_air_date?.substring(0, 4)})`
                     : ""}
                 </p>
-                <div className="ml-52 text-sm text-amber-600 md:block hidden ">
-                  <p>{mov?.vote_average}</p>
+                <div className="ml-52 text-sm text-secondary md:block hidden ">
+                  <p className="flex">
+                    <StarIcon className="w-4 mx-1" />
+                    {mov?.vote_average}
+                  </p>
                 </div>
               </div>
             );

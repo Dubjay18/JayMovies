@@ -71,11 +71,8 @@ function MovieDet() {
 
   return (
     <div
-      className={
-        darkmode
-          ? "dark:bg-black dark w-full "
-          : "dark:bg-black bg-slate-200 w-full "
-      }
+      data-theme={darkmode ? "halloween" : "cupcake"}
+      className={"bg-base-100  w-full "}
     >
       <Header />
       <ReactPlaceholder
@@ -85,8 +82,8 @@ function MovieDet() {
         type="text"
         className="max-w-screen-md mx-auto mt-10 p-10"
       >
-        <div className="max-w-screen-md shadow-md mt-10 dark:text-white text-slate-600  mx-auto p-10 dark:bg-slate-900 bg-slate-50">
-          <h1 className="dark:text-white text-slate-600 sm:text-5xl text-2xl font-bold mb-9">
+        <div className="max-w-screen-md shadow-md mt-10 text-primary mx-auto p-10 bg-base-300">
+          <h1 className=" sm:text-5xl text-2xl font-bold mb-9">
             {movie?.title || movie?.original_title || movie?.name}
             {movie.release_date
               ? `(${movie?.release_date?.substring(0, 4)})`
@@ -98,7 +95,7 @@ function MovieDet() {
             height={700}
           />
           {
-            <p className="flex sm:text-xl dark:text-white text-slate-600 font-medium  my-6">
+            <p className="flex sm:text-xl  font-medium  my-6">
               <span className="underline">Genre: </span>
               {genres.map((e, i) => {
                 return (
@@ -110,14 +107,14 @@ function MovieDet() {
               })}
             </p>
           }
-          <p className="sm:text-xl  italic dark:text-white text-slate-600  mb-6">
+          <p className="sm:text-xl  italic   mb-6">
             <span className="underline font-medium">Details</span>:{" "}
             {movie?.overview}
           </p>
           {trailerUrl ? (
             <YouTube videoId={trailerUrl} opts={opts} />
           ) : (
-            <h1 className=" italic font-thin dark:text-white text-slate-600 ">
+            <h1 className=" italic font-thin text-error ">
               Trailer not avaliable
             </h1>
           )}

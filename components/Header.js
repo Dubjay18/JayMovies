@@ -35,13 +35,14 @@ function Header() {
   };
   return (
     <>
-      <div class="navbar shadow-md bg-slate-50 dark:bg-base-100">
+      <div class="navbar shadow-md bg-base-300">
         <div class="flex-1">
           <h1
-            class="btn btn-ghost normal-case dark:text-gray-200 text-gray-900 text-xl animate-bounce"
+            className="btn btn-ghost normal-case  text-xl animate-bounce"
             onClick={() => router.push("/")}
           >
-            <span className="text-primary font-bold">JAY</span>movies
+            <span className="text-primary font-bold">JAY</span>
+            <span className="text-accent">movies</span>
           </h1>
         </div>
         <label class="swap swap-rotate " onChange={mode}>
@@ -90,11 +91,13 @@ function Header() {
             </label>
             <div
               tabindex="0"
-              class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+              class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow-lg"
             >
-              <div class="card-body dark:bg-slate-900 bg-white">
+              <div class="card-body bg-base-200">
                 {/* <span class="font-bold text-lg">8 Items</span> */}
-                <span class="text-info">site still in development stage</span>
+                <span class="text-error font-bold font-poppins">
+                  site is still under development
+                </span>
               </div>
             </div>
           </div>
@@ -106,7 +109,7 @@ function Header() {
             </label>
             <ul
               tabindex="0"
-              class="menu menu-compact dropdown-content mt-3 p-2 shadow  dark:bg-base-100 bg-white rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow  bg-base-100  rounded-box w-52"
             >
               <li>
                 <a
@@ -114,7 +117,7 @@ function Header() {
                   onClick={() => router.push(`/Profile/${uid}`)}
                 >
                   Profile
-                  <span class="badge dark:bg-black dark:border-black bg-slate-200 border-white">
+                  <span class="badge dark:bg-black dark:border-black bg-slate-200 border-white text-secondary">
                     New
                   </span>
                 </a>

@@ -4,6 +4,15 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+*::-webkit-scrollbar {
+  background-color: transparent !important;
+  width: 15px;
+  margin-right: 2px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #120a25 !important;
+  border-radius: 5px;
+}
 .bg-cus {
   background: linear-gradient(rgba(138, 136, 136, 0.4), rgba(13, 19, 75, 0.9)),
     url("../assets/architect.jpg");
