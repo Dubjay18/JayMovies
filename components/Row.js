@@ -78,21 +78,6 @@ function Row({ title, fetchUrl, itemsPerPage }) {
   return (
     <div className="bg-base-200  mx-auto w-full">
       {" "}
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        renderOnZeroPageCount={null}
-        previousLabel="< previous"
-        className="btn-group md:mx-72 my-10"
-        previousLinkClassName="btn btn-outline"
-        nextLinkClassName="btn btn-outline"
-        activeLinkClassName="btn btn-active bg-indigo-700"
-        pageLinkClassName="btn btn-outline"
-        initialPage={page - 1}
-      />
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-4 mx-auto rounded p-4">
         {loading ? (
           <BounceLoader

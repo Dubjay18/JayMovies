@@ -68,7 +68,7 @@ function Sign({ email, setEmail, title, reg }) {
         // ...
       })
       .catch((error) => {
-        alert(error.message);
+        alert(error?.message);
       });
   };
   return (
