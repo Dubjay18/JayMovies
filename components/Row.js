@@ -78,7 +78,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
   return (
     <div className="bg-base-200  mx-auto w-full">
       {" "}
-      <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-4 mx-auto rounded p-4">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-4 mx-auto rounded p-4 min-h-[60vh] ">
         {loading ? (
           <BounceLoader
             color={"gray"}

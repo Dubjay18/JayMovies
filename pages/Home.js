@@ -58,7 +58,7 @@ function HomePage() {
   }, [title]);
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <Header />
       <div className="flex flex-wrap my-5 justify-between items-center mx-9">
         <h1 className="sm:text-4xl text-2xl  font-extrabold font-poppins text-primary my-10">
