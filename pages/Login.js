@@ -23,7 +23,7 @@ function Login() {
     show: { opacity: 1, marginLeft: "0px" },
   };
   return (
-    <div className=' bg-cus h-screen relative bg-no-repeat bg-cover'>
+    <div className=' bg-cus h-screen overflow-hidden relative bg-no-repeat bg-cover'>
       <div className='bg-transparent  flex py-2 px-10 w-full items-center justify-between '>
         <h1 className='sm:text-4xl text-2xl text-white  font-bold font-mono p-5 cursor-pointer animate-bounce'>
           JAYMOVIES
