@@ -72,7 +72,7 @@ function MovieDet() {
   return (
     <div
       data-theme={darkmode ? "halloween" : "cupcake"}
-      className={"bg-base-100  w-full "}
+      className={"bg-base-100  w-full min-h-screen"}
     >
       <Header />
       <ReactPlaceholder

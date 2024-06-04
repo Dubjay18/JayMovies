@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import { useRouter } from "next/router";
 import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
@@ -141,7 +141,7 @@ function Row({ title, fetchUrl, itemsPerPage }) {
                 <div className="ml-52 text-sm text-secondary md:block hidden ">
                   <p className="flex">
                     <StarIcon className="w-4 mx-1" />
-                    {mov?.vote_average}
+                    {Math.ceil(mov?.vote_average)|10}
                   </p>
                 </div>
               </div>
