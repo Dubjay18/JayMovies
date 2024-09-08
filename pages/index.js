@@ -13,35 +13,7 @@ import { useStateValue } from "./../stateProvider";
 export default function Home() {
   const [{ user, uid, darkmode }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (userCred) => {
-      if (userCred) {
-        dispatch({
-          type: "SET_USER",
-          user: userCred.email,
-        });
-        dispatch({
-          type: "SET_UID",
-          uid: userCred.uid,
-        });
-        console.log(userCred);
-      } else {
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
-        dispatch({
-          type: "SET_UID",
-          uid: null,
-        });
-      }
-    });
-    return unsubscribe;
-  }, [dispatch]);
 
-  if (!user) {
-    return <Login />;
-  }
   return (
     <div
       data-theme={darkmode ? "halloween" : "cupcake"}
